@@ -1,6 +1,6 @@
 package tests;
 
-import models.CreateUserBodyModel;
+import models.UserBodyModel;
 import models.CreateUserResponseModel;
 import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
@@ -14,7 +14,7 @@ public class CreateUserTests extends TestBase{
     @Test
     void successfulCreateTest() {
 
-        CreateUserBodyModel authData = new CreateUserBodyModel();
+        UserBodyModel authData = new UserBodyModel();
         authData.setName("morpheus");
         authData.setJob("leader");
 
