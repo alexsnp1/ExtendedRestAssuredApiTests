@@ -66,4 +66,30 @@ public class CreateUserSpec {
             .log(STATUS)
             .log(BODY)
             .build();
+
+    public static RequestSpecification GetListUsersRequestSpec = with()
+            .filter(withCustomTemplates())
+            .log().uri()
+            .log().headers()
+            .header("x-api-key", "reqres-free-v1")
+            .queryParam("page", 2);
+
+    public static RequestSpecification GetSingleUserRequestSpec = with()
+            .filter(withCustomTemplates())
+            .log().uri()
+            .log().headers()
+            .header("x-api-key", "reqres-free-v1");
+
+    public static ResponseSpecification GetInfoResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(200)
+            .log(STATUS)
+            .log(BODY)
+            .build();
+
+    public static ResponseSpecification unsuccessfulGetInfoResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(404)
+            .log(STATUS)
+            .log(BODY)
+            .build();
+
 }
