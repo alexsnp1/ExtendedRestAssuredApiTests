@@ -11,7 +11,7 @@ import static io.restassured.filter.log.LogDetail.STATUS;
 import static io.restassured.http.ContentType.JSON;
 
 public class CreateUserSpec {
-    public static RequestSpecification LoginRequestSpec = with()
+    public static RequestSpecification CreateUserRequestSpec = with()
             .filter(withCustomTemplates())
             .log().uri()
             .log().body()
@@ -19,8 +19,20 @@ public class CreateUserSpec {
             .header("x-api-key", "reqres-free-v1")
             .contentType(JSON);
 
-    public static ResponseSpecification loginResponseSpec = new ResponseSpecBuilder()
+    public static ResponseSpecification CreateUserResponseSpec = new ResponseSpecBuilder()
             .expectStatusCode(201)
+            .log(STATUS)
+            .log(BODY)
+            .build();
+
+    public static RequestSpecification DeleteUserRequestSpec = with()
+            .filter(withCustomTemplates())
+            .log().uri()
+            .log().headers()
+            .header("x-api-key", "reqres-free-v1");
+
+    public static ResponseSpecification DeleteUserResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(204)
             .log(STATUS)
             .log(BODY)
             .build();

@@ -2,24 +2,20 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 
+import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.*;
+import static specs.CreateUserSpec.*;
 
 public class DeleteUserTests  extends TestBase {
 
     @Test
     void successfulDeleteTest() {
-
-        given()
-                .log().uri()
-                .header("x-api-key", "reqres-free-v1")
+        step("Удаление пользователя", () -> {
+        given(DeleteUserRequestSpec)
                 .when()
                 .delete(baseURI + basePath + "/users/2")
                 .then()
-                .log().status()
-                .log().body()
-                .statusCode(204);
-
-
+                .spec(DeleteUserResponseSpec);
+        });
     }
-
 }

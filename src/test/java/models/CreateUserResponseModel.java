@@ -1,9 +1,9 @@
-package models.lombok;
+package models;
 
 import lombok.Data;
 
 @Data
-public class DeleteUserResponseModel {
+public class CreateUserResponseModel {
     String name;
     String job;
     String id;

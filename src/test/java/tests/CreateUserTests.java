@@ -1,32 +1,31 @@
 package tests;
 
-import models.lombok.CreateUserBodyModel;
-import models.lombok.CreateUserResponseModel;
+import models.CreateUserBodyModel;
+import models.CreateUserResponseModel;
 import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static specs.CreateUserSpec.LoginRequestSpec;
-import static specs.CreateUserSpec.loginResponseSpec;
+import static specs.CreateUserSpec.*;
 
 public class CreateUserTests extends TestBase{
 
     @Test
-    void successfulCreateWithSpecsTest() {
+    void successfulCreateTest() {
 
         CreateUserBodyModel authData = new CreateUserBodyModel();
         authData.setName("morpheus");
         authData.setJob("leader");
 
         CreateUserResponseModel response = step("Создание пользователя", () ->
-                given(LoginRequestSpec)
+                given(CreateUserRequestSpec)
                         .body(authData)
 
                         .when()
                         .post(baseURI + basePath + "/users")
                         .then()
-                        .spec(loginResponseSpec)
+                        .spec(CreateUserResponseSpec)
                         .extract().as(CreateUserResponseModel.class));
 
         step("Проверка имени", () -> {
