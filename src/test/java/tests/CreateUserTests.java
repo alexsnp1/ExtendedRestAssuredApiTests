@@ -21,9 +21,8 @@ public class CreateUserTests extends TestBase{
         CreateUserResponseModel response = step("Создание пользователя", () ->
                 given(CreateUserRequestSpec)
                         .body(authData)
-
                         .when()
-                        .post(baseURI + basePath + "/users")
+                        .post("/users")
                         .then()
                         .spec(CreateUserResponseSpec)
                         .extract().as(CreateUserResponseModel.class));

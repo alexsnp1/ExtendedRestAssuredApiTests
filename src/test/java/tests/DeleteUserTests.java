@@ -13,7 +13,7 @@ public class DeleteUserTests  extends TestBase {
         step("Удаление пользователя", () -> {
         given(DeleteUserRequestSpec)
                 .when()
-                .delete(baseURI + basePath + "/users/2")
+                .delete("/users/2")
                 .then()
                 .spec(DeleteUserResponseSpec);
         });

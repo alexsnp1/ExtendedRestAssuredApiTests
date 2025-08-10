@@ -6,10 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.*;
-import static io.restassured.http.ContentType.JSON;
-import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static specs.CreateUserSpec.*;
 
 public class UpdateInfoTests extends TestBase {
     UserBodyModel authData = new UserBodyModel();
@@ -19,17 +18,12 @@ public class UpdateInfoTests extends TestBase {
         authData.setName("morpheus");
         authData.setJob("zion resident");
         CreateUserResponseModel response = step("Изменение информации через Put", () ->
-        given()
+        given(UpdateInfoRequestSpec)
                 .body(authData)
-                .contentType(JSON)
-                .log().uri()
-                .header("x-api-key", "reqres-free-v1")
                 .when()
-                .put(baseURI + basePath + "/users/2")
+                .put("/users/2")
                 .then()
-                .log().status()
-                .log().body()
-                .statusCode(200)
+                .spec(UpdateInfoResponseSpec)
                 .extract().as(CreateUserResponseModel.class));
         step("Проверка имени", () -> {
             assertEquals("morpheus", response.getName());
@@ -47,17 +41,12 @@ public class UpdateInfoTests extends TestBase {
         authData.setName("morpheus");
         authData.setJob("zion resident");
         CreateUserResponseModel response = step("Изменение информации через Patch", () ->
-        given()
+        given(UpdateInfoRequestSpec)
                 .body(authData)
-                .contentType(JSON)
-                .log().uri()
-                .header("x-api-key", "reqres-free-v1")
                 .when()
-                .patch(baseURI + basePath + "/users/2")
+                .patch("/users/2")
                 .then()
-                .log().status()
-                .log().body()
-                .statusCode(200)
+                .spec(UpdateInfoResponseSpec)
                 .extract().as(CreateUserResponseModel.class));
         step("Проверка имени", () -> {
             assertEquals("morpheus", response.getName());

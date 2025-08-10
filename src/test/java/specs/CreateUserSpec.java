@@ -36,4 +36,34 @@ public class CreateUserSpec {
             .log(STATUS)
             .log(BODY)
             .build();
+
+    public static RequestSpecification RegistrationRequestSpec = with()
+            .filter(withCustomTemplates())
+            .log().uri()
+            .log().headers()
+            .header("x-api-key", "reqres-free-v1")
+            .contentType(JSON);
+    public static ResponseSpecification unsuccessfulRegistrationResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(400)
+            .log(STATUS)
+            .log(BODY)
+            .build();
+    public static ResponseSpecification successfulRegistrationResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(200)
+            .log(STATUS)
+            .log(BODY)
+            .build();
+
+    public static RequestSpecification UpdateInfoRequestSpec = with()
+            .filter(withCustomTemplates())
+            .log().uri()
+            .log().headers()
+            .header("x-api-key", "reqres-free-v1")
+            .contentType(JSON);
+
+    public static ResponseSpecification UpdateInfoResponseSpec = new ResponseSpecBuilder()
+            .expectStatusCode(200)
+            .log(STATUS)
+            .log(BODY)
+            .build();
 }
