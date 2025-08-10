@@ -6,7 +6,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.*;
 
-public class UpdateInfoTests {
+public class UpdateInfoTests extends TestBase {
 
     @Test
     void successfulUpdateWithPutTest() {
