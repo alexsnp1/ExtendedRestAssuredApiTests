@@ -1,11 +1,13 @@
 package tests;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.*;
 import static specs.CreateUserSpec.*;
 
+@Tag("Req")
 public class DeleteUserTests  extends TestBase {
 
     @Test

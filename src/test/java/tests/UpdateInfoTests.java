@@ -2,6 +2,7 @@ package tests;
 
 import models.CreateUserResponseModel;
 import models.UserBodyModel;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
@@ -10,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static specs.CreateUserSpec.*;
 
+@Tag("Req")
 public class UpdateInfoTests extends TestBase {
     UserBodyModel authData = new UserBodyModel();
 

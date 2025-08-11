@@ -4,6 +4,7 @@ import models.CreateUserResponseModel;
 import models.GetInfoResponseModel;
 import models.GetSingleUserInfoResponseModel;
 import models.UserData;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static specs.CreateUserSpec.*;
 
+@Tag("Req")
 public class GetInfoAboutUsersTests extends TestBase  {
 
     @Test

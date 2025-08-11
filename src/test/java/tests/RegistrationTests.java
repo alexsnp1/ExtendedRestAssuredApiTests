@@ -2,6 +2,7 @@ package tests;
 
 import models.RegistrationBodyModel;
 import models.RegistrationResponseModel;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
@@ -9,6 +10,7 @@ import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.CreateUserSpec.*;
 
+@Tag("Req")
 public class RegistrationTests extends TestBase {
     RegistrationBodyModel authData = new RegistrationBodyModel();
     @Test
