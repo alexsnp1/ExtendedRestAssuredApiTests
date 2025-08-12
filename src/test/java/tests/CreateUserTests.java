@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.emptyOrNullString;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static specs.CreateUserSpec.*;
@@ -31,8 +34,8 @@ public class CreateUserTests extends TestBase{
         step("Проверка работы", () ->
             assertEquals("leader", response.getJob()));
         step("Проверка айди", () ->
-            assertTrue(response.getId() != null && !response.getId().isEmpty()));
+                assertThat(response.getId(), not(emptyOrNullString())));
         step("Проверка айди даты создания", () ->
-            assertTrue(response.getCreatedAt() != null && !response.getCreatedAt().isEmpty()));
+                assertThat(response.getCreatedAt(), not(emptyOrNullString())));
     }
 }
