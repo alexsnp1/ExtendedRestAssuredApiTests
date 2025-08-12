@@ -132,7 +132,7 @@ gradle clean req_test
   <img src="images/screen/allure_report1.png" width="800" alt="Allure">
 
 
-## <img src="media/screens/telegram.svg" width="40" height="40" alt="Telegram"> Уведомления в Telegram
+## <img src="images/screen/telegram.svg" width="40" height="40" alt="Telegram"> Уведомления в Telegram
 
 ### После завершения сборки, бот, созданный в Telegram, автоматически обрабатывает и отправляет сообщение с результатом
 
