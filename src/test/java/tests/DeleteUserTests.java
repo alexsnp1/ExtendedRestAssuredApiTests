@@ -12,12 +12,11 @@ public class DeleteUserTests  extends TestBase {
 
     @Test
     void successfulDeleteTest() {
-        step("Удаление пользователя", () -> {
-        given(DeleteUserRequestSpec)
+        step("Удаление пользователя", () ->
+        given(RequestSpec)
                 .when()
                 .delete("/users/2")
                 .then()
-                .spec(DeleteUserResponseSpec);
-        });
+                .spec(responseSpec(204)));
     }
 }

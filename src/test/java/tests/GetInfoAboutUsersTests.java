@@ -22,15 +22,15 @@ public class GetInfoAboutUsersTests extends TestBase  {
     void GetListUsersTest() {
 
         GetInfoResponseModel response = step("Получение списка пользователей", () ->
-        given(GetListUsersRequestSpec)
+        given(RequestSpec)
                 .when()
+                .queryParam("page", 2)
                 .get("/users")
                 .then()
-                .spec(GetInfoResponseSpec)
+                .spec(responseSpec(200))
                 .extract().as(GetInfoResponseModel.class));
-        step("Проверка номера страницы", () -> {
-            assertEquals(2, response.getPage());
-        });
+        step("Проверка номера страницы", () ->
+            assertEquals(2, response.getPage()));
         step("Проверка отображения порядковых номеров пользователей", () -> {
             List<Integer> actualIds = response.getData()
                     .stream()
@@ -38,23 +38,22 @@ public class GetInfoAboutUsersTests extends TestBase  {
                     .toList();
             assertEquals(List.of(7, 8, 9, 10, 11, 12), actualIds);
         });
-        step("Проверка конкретного пользователя", () -> {
+        step("Проверка конкретного пользователя", () ->
             assertTrue(response.getData().stream()
                     .anyMatch(u -> u.getEmail().equals("george.edwards@reqres.in")
                             && u.getFirst_name().equals("George")
                             && u.getLast_name().equals("Edwards")
-                            && u.getAvatar().equals("https://reqres.in/img/faces/11-image.jpg")));
-        });
+                            && u.getAvatar().equals("https://reqres.in/img/faces/11-image.jpg"))));
     }
 
     @Test
     void GetSingleUserTest() {
         GetSingleUserInfoResponseModel response = step("Получение информации о пользователе", () ->
-        given(GetSingleUserRequestSpec)
+        given(RequestSpec)
                 .when()
                 .get("/users/11")
                 .then()
-                .spec(GetInfoResponseSpec)
+                .spec(responseSpec(200))
                 .extract().as(GetSingleUserInfoResponseModel.class));
         step("Проверка конкретного пользователя", () -> {
             UserData u = response.getData();
@@ -69,12 +68,12 @@ public class GetInfoAboutUsersTests extends TestBase  {
     }
     @Test
     void unsuccessfulGetSingleUserTest() {
-        GetSingleUserInfoResponseModel response = step("Получение информации и пользователе c ошибкой", () ->
-        given(GetSingleUserRequestSpec)
+        GetSingleUserInfoResponseModel response = step("Получение информации o пользователе c ошибкой", () ->
+        given(RequestSpec)
                 .when()
                 .get("/users/23")
                 .then()
-                .spec(unsuccessfulGetInfoResponseSpec)
+                .spec(responseSpec(404))
                 .extract().as(GetSingleUserInfoResponseModel.class));
     }
 }

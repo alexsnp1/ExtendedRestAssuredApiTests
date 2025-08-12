@@ -15,31 +15,24 @@ public class CreateUserTests extends TestBase{
 
     @Test
     void successfulCreateTest() {
-
-        UserBodyModel authData = new UserBodyModel();
-        authData.setName("morpheus");
-        authData.setJob("leader");
+        UserBodyModel authData = new UserBodyModel("morpheus", "leader");
 
         CreateUserResponseModel response = step("Создание пользователя", () ->
-                given(CreateUserRequestSpec)
+                given(RequestSpec)
                         .body(authData)
                         .when()
                         .post("/users")
                         .then()
-                        .spec(CreateUserResponseSpec)
+                        .spec(responseSpec(201))
                         .extract().as(CreateUserResponseModel.class));
 
-        step("Проверка имени", () -> {
-            assertEquals("morpheus", response.getName());
-        });
-        step("Проверка работы", () -> {
-            assertEquals("leader", response.getJob());
-        });
-        step("Проверка айди", () -> {
-            assertTrue(response.getId() != null && !response.getId().isEmpty());
-        });
-        step("Проверка айди даты создания", () -> {
-            assertTrue(response.getCreatedAt() != null && !response.getCreatedAt().isEmpty());
-        });
+        step("Проверка имени", () ->
+            assertEquals("morpheus", response.getName()));
+        step("Проверка работы", () ->
+            assertEquals("leader", response.getJob()));
+        step("Проверка айди", () ->
+            assertTrue(response.getId() != null && !response.getId().isEmpty()));
+        step("Проверка айди даты создания", () ->
+            assertTrue(response.getCreatedAt() != null && !response.getCreatedAt().isEmpty()));
     }
 }

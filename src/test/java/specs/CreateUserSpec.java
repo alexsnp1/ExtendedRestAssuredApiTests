@@ -11,7 +11,7 @@ import static io.restassured.filter.log.LogDetail.STATUS;
 import static io.restassured.http.ContentType.JSON;
 
 public class CreateUserSpec {
-    public static RequestSpecification CreateUserRequestSpec = with()
+    public static RequestSpecification RequestSpec = with()
             .filter(withCustomTemplates())
             .log().uri()
             .log().body()
@@ -19,77 +19,11 @@ public class CreateUserSpec {
             .header("x-api-key", "reqres-free-v1")
             .contentType(JSON);
 
-    public static ResponseSpecification CreateUserResponseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(201)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static RequestSpecification DeleteUserRequestSpec = with()
-            .filter(withCustomTemplates())
-            .log().uri()
-            .log().headers()
-            .header("x-api-key", "reqres-free-v1");
-
-    public static ResponseSpecification DeleteUserResponseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(204)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static RequestSpecification RegistrationRequestSpec = with()
-            .filter(withCustomTemplates())
-            .log().uri()
-            .log().headers()
-            .header("x-api-key", "reqres-free-v1")
-            .contentType(JSON);
-    public static ResponseSpecification unsuccessfulRegistrationResponseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(400)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-    public static ResponseSpecification successfulRegistrationResponseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static RequestSpecification UpdateInfoRequestSpec = with()
-            .filter(withCustomTemplates())
-            .log().uri()
-            .log().headers()
-            .header("x-api-key", "reqres-free-v1")
-            .contentType(JSON);
-
-    public static ResponseSpecification UpdateInfoResponseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static RequestSpecification GetListUsersRequestSpec = with()
-            .filter(withCustomTemplates())
-            .log().uri()
-            .log().headers()
-            .header("x-api-key", "reqres-free-v1")
-            .queryParam("page", 2);
-
-    public static RequestSpecification GetSingleUserRequestSpec = with()
-            .filter(withCustomTemplates())
-            .log().uri()
-            .log().headers()
-            .header("x-api-key", "reqres-free-v1");
-
-    public static ResponseSpecification GetInfoResponseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static ResponseSpecification unsuccessfulGetInfoResponseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(404)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
+    public static ResponseSpecification responseSpec(int expectedStatusCode) {
+        return new ResponseSpecBuilder()
+                .expectStatusCode(expectedStatusCode)
+                .log(STATUS)
+                .log(BODY)
+                .build();
+    }
 }
